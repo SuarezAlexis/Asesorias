@@ -54,7 +54,7 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //Validación de datos
-        request.getRequestDispatcher(LOGIN_PATH).forward(request, response);
+        response.sendRedirect(response.encodeURL(request.getContextPath() + CONTROLLER_PATH));
     }
 
     /**

@@ -13,6 +13,6 @@
     </head>
     <body>
         <h1>Hello World!</h1>
-        <a href="<%= request.getContextPath()%>/login">Ingresar a aplicaci&oactue;n</a>
+        <a href="<%= request.getContextPath()%>/login">Ingresar a aplicaci&oacute;n</a>
     </body>
 </html>
