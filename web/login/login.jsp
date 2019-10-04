@@ -21,7 +21,7 @@
                 <p>Para iniciar sesión ingresa tus credenciales.</p>
             </div>
             <div>
-                <form name="login" action="/login" method="post">
+                <form name="login" action="<%= request.getContextPath() %>/login" method="post">
                     <div class="row form-group">
                         <div class="col-xs-2">
                             <label>Nombre de usuario</label>
@@ -43,7 +43,12 @@
                         <label>Recordar usuario en este equipo</label>
                     </div>
                     <div class="row">
-                        <input type="submit" value="Iniciar sesión" class="btn btn-block"/>
+                        <div class="col-xs-6">
+                            <input type="submit" value="Iniciar sesión" class="btn btn-block btn-success"/>
+                        </div>
+                        <div class="col-xs-6">
+                            <input type="reset" value="Limpiar" class="btn btn-block btn-default"/>
+                        </div>
                     </div>
                 </form>
                 <div>
