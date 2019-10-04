@@ -18,8 +18,9 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class LoginServlet extends HttpServlet {
     
-    private static final String LOGIN = "/login/login.jsp";
-    private static final String PARAM = "accion";
+    private static final String LOGIN_PATH = "/login/login.jsp";
+    private static final String CONTROLLER_PATH = "/controller";
+    private static final String PARAM_NAME = "accion";
     
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -33,11 +34,11 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String accion = request.getParameter(PARAM);
+        String accion = request.getParameter(PARAM_NAME);
         if(accion != null && ! accion.isEmpty()) {
             
         } else {
-            request.getRequestDispatcher(LOGIN).forward(request,response);
+            request.getRequestDispatcher(LOGIN_PATH).forward(request,response);
         }
     }
 
@@ -52,7 +53,8 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        //Validación de datos
+        request.getRequestDispatcher(LOGIN_PATH).forward(request, response);
     }
 
     /**
