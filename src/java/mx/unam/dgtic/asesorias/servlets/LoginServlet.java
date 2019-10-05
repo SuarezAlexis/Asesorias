@@ -85,8 +85,8 @@ public class LoginServlet extends HttpServlet {
     private Map<String, Object> validaLogin(HttpServletRequest request) {
         Map<String, Object> r = new HashMap<>();
         UsuarioDto u = null;
-        String errorUsername = "El nombre de usuario es incorrecto.";
-        String errorPassword = "La contraseña es incorrecta.";
+        String errorUsername = "* El nombre de usuario es incorrecto.";
+        String errorPassword = "* La contraseña es incorrecta.";
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         if(username != null && !username.isEmpty())

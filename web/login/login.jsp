@@ -6,12 +6,13 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-        <title>Asesorías :: Iniciar sesión</title>
+        <title>Iniciar sesi&oacute;n :: <fmt:message bundle="${applicationScope.llaves}" key="titulo.app"/></title>
     </head>
     <body>
         <div class="container">
@@ -25,13 +26,13 @@
             <div>
                 <form name="login" action="<c:url value="/login" />" method="post">
                     <div class="row form-group">
-                        <%
-                            if(request.getSession().getAttribute("errorUsername") != null) {
-                                out.println("<div class=\"row text-danger\"><div class=\"col-xs-12\"><strong>"
-                                    + request.getSession().getAttribute("errorUsername")
-                                    + "</strong></div></div>");
-                            }
-                        %>
+                        <c:if test="${not empty sessionScope.errorUsername}">
+                            <div class="row text-danger">
+                                <div class="col-xs-12">
+                                    <strong><c:out value="${sessionScope.errorUsername}"/></strong>
+                                </div>
+                            </div>
+                        </c:if>
                         <div class="col-xs-2">
                             <label>Nombre de usuario</label>
                         </div>
@@ -40,13 +41,13 @@
                         </div>
                     </div>
                     <div class="row form-group">
-                        <%
-                            if(request.getSession().getAttribute("errorPassword") != null) {
-                                out.println("<div class=\"row text-danger\"><div class=\"col-xs-12\"><strong>"
-                                    + request.getSession().getAttribute("errorPassword")
-                                    + "</strong></div></div>");
-                            }
-                        %>
+                        <c:if test="${not empty sessionScope.errorPassword}">
+                            <div class="row text-danger">
+                                <div class="col-xs-12">
+                                    <strong><c:out value="${sessionScope.errorPassword}"/></strong>
+                                </div>
+                            </div>
+                        </c:if>
                         <div class="col-xs-2">
                             <label>Contraseña</label>
                         </div>

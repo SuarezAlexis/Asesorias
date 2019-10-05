@@ -13,7 +13,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title><fmt:message key="titulo" bundle="${applicationScope.llaves}"/></title>
+        <title>Inicio :: <fmt:message key="titulo.app" bundle="${applicationScope.llaves}"/></title>
     </head>
     <body>
         <h1>Hello World!</h1>
