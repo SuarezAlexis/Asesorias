@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -22,7 +23,7 @@
                 <p>Para iniciar sesión ingresa tus credenciales.</p>
             </div>
             <div>
-                <form name="login" action="<%= request.getContextPath() %>/login" method="post">
+                <form name="login" action="<c:url value="/login" />" method="post">
                     <div class="row form-group">
                         <div class="col-xs-2">
                             <label>Nombre de usuario</label>

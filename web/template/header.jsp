@@ -6,7 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<nav class="navbar navbar-default">
+<!-- <nav class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
             <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/ENPlogo.jpg" style="height: 150px; padding-right: 20px;"/>
@@ -23,3 +23,5 @@
         </ul>
     </div>
 </nav>
+-->
+HEADER
