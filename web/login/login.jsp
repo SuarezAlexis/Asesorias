@@ -25,19 +25,33 @@
             <div>
                 <form name="login" action="<c:url value="/login" />" method="post">
                     <div class="row form-group">
+                        <%
+                            if(request.getSession().getAttribute("errorUsername") != null) {
+                                out.println("<div class=\"row text-danger\"><div class=\"col-xs-12\"><strong>"
+                                    + request.getSession().getAttribute("errorUsername")
+                                    + "</strong></div></div>");
+                            }
+                        %>
                         <div class="col-xs-2">
                             <label>Nombre de usuario</label>
                         </div>
                         <div class="col-xs-10">
-                            <input id="username" type="text" class="form-control"/>
+                            <input id="username" name="username" type="text" class="form-control"/>
                         </div>
                     </div>
                     <div class="row form-group">
+                        <%
+                            if(request.getSession().getAttribute("errorPassword") != null) {
+                                out.println("<div class=\"row text-danger\"><div class=\"col-xs-12\"><strong>"
+                                    + request.getSession().getAttribute("errorPassword")
+                                    + "</strong></div></div>");
+                            }
+                        %>
                         <div class="col-xs-2">
                             <label>Contraseña</label>
                         </div>
                         <div class="col-xs-10">
-                            <input id="password" type="password" class="form-control"/>
+                            <input id="password" name="password" type="password" class="form-control"/>
                         </div>
                     </div>
                     <div class="row form-group">

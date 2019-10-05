@@ -7,10 +7,14 @@ package mx.unam.dgtic.asesorias.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
+import mx.unam.dgtic.modelo.dto.UsuarioDto;
 
 /**
  *
@@ -54,7 +58,17 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //Validación de datos
-        response.sendRedirect(response.encodeURL(request.getContextPath() + CONTROLLER_PATH));
+        Map<String, Object> resultado = validaLogin(request);
+        
+        if (resultado.get("Usuario") != null) {
+            request.getSession().setAttribute("usuario", resultado.get("Usuario"));
+            response.sendRedirect(response.encodeURL(request.getContextPath() + CONTROLLER_PATH));
+        } else {
+            request.getSession().setAttribute("errorUsername", resultado.get("errorUsername"));
+            request.getSession().setAttribute("errorPassword", resultado.get("errorPassword"));
+            response.sendRedirect(response.encodeURL(request.getContextPath() + LOGIN_PATH));
+        }
+        
     }
 
     /**
@@ -66,5 +80,35 @@ public class LoginServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+    
+    
+    private Map<String, Object> validaLogin(HttpServletRequest request) {
+        Map<String, Object> r = new HashMap<>();
+        UsuarioDto u = null;
+        String errorUsername = "El nombre de usuario es incorrecto.";
+        String errorPassword = "La contraseña es incorrecta.";
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        if(username != null && !username.isEmpty())
+        {
+            if(username.equals("java"))
+            {
+                if(password != null && !password.isEmpty())
+                {
+                    if(password.equals("123"))
+                    {
+                        u = new UsuarioDto();
+                        u.setUsername(username);
+                        u.setPassword(password);
+                        r.put("Usuario",u);
+                    } else { r.put("errorPassword", errorPassword); }
+                } else { r.put("errorPassword", errorPassword); }
+            } else { r.put("errorUsername", errorUsername); }
+        } else {
+            r.put("errorUsername", errorUsername);
+        }
+        
+        return r;
+    }
 
 }

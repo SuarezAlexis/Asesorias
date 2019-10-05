@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <!-- <nav class="navbar navbar-default">
     <div class="container-fluid">
@@ -24,4 +25,9 @@
     </div>
 </nav>
 -->
-HEADER
+<p>HEADER</p>
+<p style="text-align: right;">
+    <c:if test="${not empty sessionScope.usuario}">
+        Usuario: <c:out value="${sessionScope.usuario.username}" />
+    </c:if>
+</p>
