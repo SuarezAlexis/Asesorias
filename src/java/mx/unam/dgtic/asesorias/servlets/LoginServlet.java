@@ -65,6 +65,7 @@ public class LoginServlet extends HttpServlet {
         } else {
             request.getSession().setAttribute("errorUsername", resultado.get("errorUsername"));
             request.getSession().setAttribute("errorPassword", resultado.get("errorPassword"));
+            request.getSession().setAttribute("errorHabilitado", resultado.get("errorHabilitado"));
             response.sendRedirect(response.encodeURL(request.getContextPath() + LOGIN_PATH));
         }
         
