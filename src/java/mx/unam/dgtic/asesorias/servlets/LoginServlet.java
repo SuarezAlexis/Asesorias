@@ -6,14 +6,14 @@
 package mx.unam.dgtic.asesorias.servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
+import mx.unam.dgtic.modelo.dao.UsuarioDao;
+import mx.unam.dgtic.modelo.dao.UsuarioDaoJdbc;
 import mx.unam.dgtic.modelo.dto.UsuarioDto;
 
 /**
@@ -26,7 +26,6 @@ public class LoginServlet extends HttpServlet {
     private static final String CONTROLLER_PATH = "/controller";
     private static final String PARAM_NAME = "accion";
     
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -91,19 +90,12 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("password");
         if(username != null && !username.isEmpty())
         {
-            if(username.equals("java"))
-            {
-                if(password != null && !password.isEmpty())
-                {
-                    if(password.equals("123"))
-                    {
-                        u = new UsuarioDto();
-                        u.setUsername(username);
-                        u.setPassword(password);
-                        r.put("Usuario",u);
-                    } else { r.put("errorPassword", errorPassword); }
-                } else { r.put("errorPassword", errorPassword); }
-            } else { r.put("errorUsername", errorUsername); }
+            UsuarioDao dao = new UsuarioDaoJdbc();
+            u = dao.autenticar(username, password);
+            if(u != null)
+            { r.put("Usuario",u); } 
+            else 
+            { r.put("errorUsername", errorUsername); }
         } else {
             r.put("errorUsername", errorUsername);
         }
