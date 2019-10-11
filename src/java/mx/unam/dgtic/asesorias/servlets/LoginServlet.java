@@ -86,14 +86,25 @@ public class LoginServlet extends HttpServlet {
         UsuarioDto u = null;
         String errorUsername = "* El nombre de usuario es incorrecto.";
         String errorPassword = "* La contraseña es incorrecta.";
+        String errorHabilitado = "* Este usuario se encuentra deshabilitado.";
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         if(username != null && !username.isEmpty())
         {
             UsuarioDao dao = new UsuarioDaoJdbc();
-            u = dao.autenticar(username, password);
+            u = dao.obtener(username);
             if(u != null)
-            { r.put("Usuario",u); } 
+            { 
+                if(u.getPassword().equals(password))
+                { 
+                    if(u.isHabilitado())
+                        r.put("Usuario",u); 
+                    else
+                        r.put("errorHabilitado", errorHabilitado);
+                }
+                else
+                { r.put("errorPassword", errorPassword); }
+            } 
             else 
             { r.put("errorUsername", errorUsername); }
         } else {

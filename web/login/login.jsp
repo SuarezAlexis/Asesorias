@@ -26,6 +26,13 @@
             <div>
                 <form name="login" action="<c:url value="/login" />" method="post">
                     <div class="row form-group">
+                        <c:if test="${not empty sessionScope.errorHabilitado}">
+                            <div class="row text-danger">
+                                <div class="col-xs-12">
+                                    <strong><c:out value="${sessionScope.errorHabilitado}"/></strong>
+                                </div>
+                            </div>
+                        </c:if>
                         <c:if test="${not empty sessionScope.errorUsername}">
                             <div class="row text-danger">
                                 <div class="col-xs-12">
