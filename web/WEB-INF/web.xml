@@ -13,6 +13,10 @@
         <servlet-class>mx.unam.dgtic.asesorias.servlets.CatalogosServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
+    <servlet>
+        <servlet-name>UsuariosServlet</servlet-name>
+        <servlet-class>mx.unam.dgtic.asesorias.servlets.UsuariosServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -27,6 +31,10 @@
     <servlet-mapping>
         <servlet-name>CatalogosServlet</servlet-name>
         <url-pattern>/catalogos</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UsuariosServlet</servlet-name>
+        <url-pattern>/usuario</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
