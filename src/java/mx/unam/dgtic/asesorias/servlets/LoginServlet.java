@@ -38,11 +38,14 @@ public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String accion = request.getParameter(PARAM_NAME);
-        if(accion != null && ! accion.isEmpty()) {
-            
-        } else {
-            request.getRequestDispatcher(LOGIN_PATH).forward(request,response);
+        if(accion != null) {
+            switch(accion) {
+                case "salir":
+                    request.getSession(false).invalidate();
+                    break;
+            }
         }
+        request.getRequestDispatcher(LOGIN_PATH).forward(request,response);
     }
 
     /**

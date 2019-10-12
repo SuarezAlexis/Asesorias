@@ -20,23 +20,23 @@ and open the template in the editor.
     grid-template-columns: 1fr 2fr 1fr;
 }
 .header {
-    /*background: deepskyblue;*/
+    background: deepskyblue;
     grid-area: header;
 }
 .left_menu {
-    /*background: orangered;*/
+    background: orangered;
     grid-area: left;
 }
 .main {
-    /*background: limegreen;*/
+    background: limegreen;
     grid-area: main;
 }
 .footer {
-    /*background: blueviolet;*/
+    background: blueviolet;
     grid-area: footer;
 }
 .box {
-    /*color: white;*/
+    color: white;
     font-size: 14pt;
     text-align: center;
     padding: 4rem;

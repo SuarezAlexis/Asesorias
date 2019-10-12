@@ -5,5 +5,19 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
-<p>Esto es el MENU</p>
+
+<p>MENU</p>
+<ul>
+    <c:if test="${not empty applicationScope.urlItems}">
+        <c:forEach items="${applicationScope.urlItems}" var="item" >
+            <li> 
+                <a href="<c:url value="/controller?accion=${item.valor}"/>">
+                    <c:out value="${item.etiqueta}" />
+                </a>
+            </li>
+        </c:forEach>
+    </c:if>
+</ul>
