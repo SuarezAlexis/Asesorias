@@ -6,24 +6,45 @@
 package mx.unam.dgtic.asesorias.servlets;
 
 import java.io.IOException;
-import java.util.List;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import mx.unam.dgtic.asesorias.servicios.UsuariosService;
-import mx.unam.dgtic.modelo.dto.UrlItem;
 
 /**
  *
- * @author JAVA
+ * @author alexis.suarez
  */
-public class ControllerServlet extends HttpServlet {
-    
-    private static final String MAIN_PATH = "/site/webapp.jsp";
-    private static final String LOGIN_PATH = "/login";
-    private static final String PARAM_NAME = "accion";
-    
+public class TiposSolicitanteServlet extends HttpServlet {
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet TiposSolicitanteServlet</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet TiposSolicitanteServlet at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
+    }
+
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -35,19 +56,7 @@ public class ControllerServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String accion = request.getParameter(PARAM_NAME);
-        if(request.getSession().getAttribute("usuario") != null) {
-            if(accion != null && !accion.isEmpty()) {
-                switch(accion) {
-                    case "usuarios":
-                        request.setAttribute("usuarios", UsuariosService.getInstance().obtenerTodos());
-                        break;
-                }
-            }
-            request.getRequestDispatcher(MAIN_PATH).forward(request, response);
-        }
-        else
-            request.getRequestDispatcher(LOGIN_PATH).forward(request, response);
+        processRequest(request, response);
     }
 
     /**
@@ -61,7 +70,7 @@ public class ControllerServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        processRequest(request, response);
     }
 
     /**

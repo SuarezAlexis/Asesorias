@@ -8,10 +8,6 @@
             <explicit-platform explicit-source-supported="true"/>
             <web-module-libraries>
                 <library dirs="200">
-                    <file>${file.reference.mysql-connector-java-5.0.4-bin.jar}</file>
-                    <path-in-war>WEB-INF/lib</path-in-war>
-                </library>
-                <library dirs="200">
                     <file>${file.reference.asesorias-modelo.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>

@@ -17,6 +17,30 @@
         <servlet-name>UsuariosServlet</servlet-name>
         <servlet-class>mx.unam.dgtic.asesorias.servlets.UsuariosServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RolesServlet</servlet-name>
+        <servlet-class>mx.unam.dgtic.asesorias.servlets.RolesServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SolicitantesServlet</servlet-name>
+        <servlet-class>mx.unam.dgtic.asesorias.servlets.SolicitantesServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PisosServlet</servlet-name>
+        <servlet-class>mx.unam.dgtic.asesorias.servlets.PisosServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AsesoriasServlet</servlet-name>
+        <servlet-class>mx.unam.dgtic.asesorias.servlets.AsesoriasServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>TiposSolicitanteServlet</servlet-name>
+        <servlet-class>mx.unam.dgtic.asesorias.servlets.TiposSolicitanteServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>TiposAsesoriaServlet</servlet-name>
+        <servlet-class>mx.unam.dgtic.asesorias.servlets.TiposAsesoriaServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -35,6 +59,30 @@
     <servlet-mapping>
         <servlet-name>UsuariosServlet</servlet-name>
         <url-pattern>/usuario</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RolesServlet</servlet-name>
+        <url-pattern>/rol</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SolicitantesServlet</servlet-name>
+        <url-pattern>/solicitante</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PisosServlet</servlet-name>
+        <url-pattern>/piso</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AsesoriasServlet</servlet-name>
+        <url-pattern>/asesoria</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TiposSolicitanteServlet</servlet-name>
+        <url-pattern>/tipoSolicitante</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TiposAsesoriaServlet</servlet-name>
+        <url-pattern>/tipoAsesoria</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

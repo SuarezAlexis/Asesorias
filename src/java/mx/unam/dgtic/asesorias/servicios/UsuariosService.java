@@ -6,6 +6,7 @@
 package mx.unam.dgtic.asesorias.servicios;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import mx.unam.dgtic.modelo.dao.UsuarioDao;
@@ -49,17 +50,33 @@ public class UsuariosService {
         
         if( error |= (u.getUsername() == null || u.getUsername().isEmpty() || u.getUsername().length() > 32))
             request.getSession().setAttribute("errorUsername",errorUsername);
+        else
+            request.getSession().setAttribute("errorUsername",null);
+        
         if( error |= (u.getNombre() == null || u.getNombre().isEmpty() || u.getNombre().length() > 32))
             request.getSession().setAttribute("errorNombre",errorNombre);
+        else
+            request.getSession().setAttribute("errorNombre",null);
+            
         if( error |= (u.getApellidos() == null || u.getApellidos().isEmpty() || u.getApellidos().length() > 64))
             request.getSession().setAttribute("errorApellidos",errorApellidos);
+        else
+            request.getSession().setAttribute("errorApellidos",null);
+        
         if( error |= (u.getPassword() == null || u.getPassword().isEmpty() || u.getPassword().length() > 64 || !u.getPassword().equals(request.getParameter("confirmacion").toString())))
-            request.getSession().setAttribute("errorPasswprd",errorPassword);
+            request.getSession().setAttribute("errorPassword",errorPassword);
+        else
+            request.getSession().setAttribute("errorPassword",null);
+        
         if( error |= (u.getEmail() == null || u.getEmail().isEmpty() || u.getEmail().length() > 128 || !u.getEmail().matches("([A-Za-z0-9._-])+@([A-Za-z0-9._-])+\\.([A-Za-z0-9._-]{2,4})")))
             request.getSession().setAttribute("errorEmail",errorEmail);
+        else
+            request.getSession().setAttribute("errorEmail",null);
+        
         if(!error)
-            request.getSession().setAttribute("usuario", u);
-        return u;
+            return u;
+        else
+            return null;
     }
     
     public UsuarioDto guardar(UsuarioDto dto) {
@@ -68,6 +85,10 @@ public class UsuariosService {
     
     public UsuarioDto obtener(String username) {
         return dao.obtener(username);
+    }
+    
+    public List<UsuarioDto> obtenerTodos() {
+        return dao.obtenerTodos();
     }
     
     public UsuarioDto eliminar(String username) {

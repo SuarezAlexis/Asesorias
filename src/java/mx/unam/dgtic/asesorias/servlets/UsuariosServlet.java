@@ -33,7 +33,6 @@ public class UsuariosServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
     }
 
     /**
@@ -52,7 +51,7 @@ public class UsuariosServlet extends HttpServlet {
         if(u != null) {
             UsuariosService.getInstance().guardar(u);
         }
-        response.sendRedirect(response.encodeURL(request.getContextPath() + CONTROLLER_PATH));
+        response.sendRedirect(response.encodeURL(request.getContextPath() + CONTROLLER_PATH + "?accion=usuarios"));
         
     }
 

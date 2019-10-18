@@ -20,11 +20,13 @@
             <div id="header" class="row text-center">
                 <jsp:include page="/template/header.jsp" />
             </div>
-            <div id="main" class="row">
-                <div id="menu" class="col-xs-3">
+            <div id="menu" class="row" >
+                <div class="col-xs-12">
                     <jsp:include page="/template/menu.jsp" />
                 </div>
-                <div id="body" class="col-xs-9">
+            </div>
+            <div id="main" class="row">
+                <div id="body" class="col-xs-12">
                     <jsp:include page="/template/body.jsp" />
                 </div>
             </div>

@@ -8,7 +8,28 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 
+<c:if test="${not empty applicationScope.urlItems}">
+    <c:forEach items="${applicationScope.urlItems}" var="item" >
+        <c:if test="${param.accion eq item.valor}" >
+            <c:set var="pag" value="${'/site/'.concat(param.accion).concat('.jsp')}" />
+        </c:if>
+    </c:forEach>
+</c:if>
 
+<c:choose>
+    <c:when test="${param.accion eq 'salir'}" >
+        <jsp:forward page="/login"/>
+    </c:when>
+    <c:when test="${pag != null}">
+        <jsp:include page="${pag}" />
+    </c:when>
+    <c:otherwise>
+        <jsp:include page="/site/inicio.jsp" />
+    </c:otherwise>
+</c:choose>
+
+
+<%--
 <c:choose>
     <c:when test="${param.accion eq 'nuevo'}">
         <jsp:include page="/site/nuevo.jsp" />
@@ -23,3 +44,4 @@
         <jsp:include page="/site/inicio.jsp" />
     </c:otherwise>
 </c:choose>
+--%>
