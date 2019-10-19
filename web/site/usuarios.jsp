@@ -28,7 +28,7 @@
             <div> <c:out value="${sessionScope.errorPassword}" /> </div>
         </c:if>
     </div>
-    <form id="nuevo" action="<c:url value="usuario" />" method="post" >
+    <form id="nuevo" action="<c:url value="usuario" />" method="post" accept-charset="UTF-8">
         <div class="col-xs-3 form-group <c:out value="${sessionScope.errorUsername != null? 'text-danger' : ''}" />">
             <label for="username">Nombre de usuario</label>
             <input type="text" id="username" name="username" class="form-control <c:out value="${sessionScope.errorUsername != null? 'has-error' : ''}" />" value="<c:out value="${sessionScope.usuarioDto != null? sessionScope.usuarioDto.username : ''}"/>"/>

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import mx.unam.dgtic.asesorias.servicios.RolesService;
 import mx.unam.dgtic.asesorias.servicios.UsuariosService;
 
 /**
@@ -42,6 +43,9 @@ public class ControllerServlet extends HttpServlet {
             switch(accion) {
                 case "usuarios":
                     request.setAttribute("usuarios", UsuariosService.getInstance().obtenerTodos());
+                    break;
+                case "roles":
+                    request.setAttribute("roles", RolesService.getInstance().obtenerTodos());
                     break;
             }
         } else {

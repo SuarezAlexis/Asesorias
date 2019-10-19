@@ -6,8 +6,6 @@
 package mx.unam.dgtic.asesorias.servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,18 +20,6 @@ import mx.unam.dgtic.modelo.dto.UsuarioDto;
 public class UsuariosServlet extends HttpServlet {
 
     private static final String CONTROLLER_PATH = "/controller";
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-    }
 
     /**
      * Handles the HTTP <code>POST</code> method.
