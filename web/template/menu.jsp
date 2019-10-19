@@ -10,10 +10,10 @@
 <!DOCTYPE html>
 
 <ul class="nav nav-pills nav-justified">
-    <li class="active"><a href="#">P&aacute;gina principal</a></li>
+    <li class="<c:out value="${param.accion == null or empty param.accion? 'active' : ''}"/>"><a href="<c:url value="/controller"/>">P&aacute;gina principal</a></li>
     <c:if test="${not empty applicationScope.urlItems}">
         <c:forEach items="${applicationScope.urlItems}" var="item" >
-            <li> 
+            <li class="<c:out value="${param.accion eq item.valor? 'active' : ''}"/>" > 
                 <a href="<c:url value="/controller?accion=${item.valor}"/>">
                     <c:out value="${item.etiqueta}" />
                 </a>

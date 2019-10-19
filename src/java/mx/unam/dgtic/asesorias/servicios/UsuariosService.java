@@ -31,6 +31,17 @@ public class UsuariosService {
         return instance;
     }
     
+    public static UsuarioDto obtener(HttpServletRequest request) {
+        UsuarioDto u = new UsuarioDto();
+        u.setUsername(request.getParameter("username"));
+        u.setNombre(request.getParameter("nombre"));
+        u.setApellidos(request.getParameter("apellidos"));
+        u.setPassword(request.getParameter("password"));
+        u.setEmail(request.getParameter("email"));
+        u.setHabilitado("on".equals(request.getParameter("habilitado")));
+        return u;
+    }
+    
     public static UsuarioDto validar(HttpServletRequest request) {
         String errorUsername = "* El campo Nombre de usuario es obligatorio y debe contener menos de 32 caracteres.";
         String errorNombre = "* El campo Nombre es obligatorio y debe contener menos de 32 caracteres.";
@@ -38,13 +49,8 @@ public class UsuariosService {
         String errorPassword = "* El campo Contraseña es obligatorio, debe contener menos de 64 caracteres y debe coincidir con la confirmación.";
         String errorEmail = "* El campo E-mail es obligatorio, debe contener menos de 128 caracteres y debe ser una dirección de correo electrónico válida.";
         
-        UsuarioDto u = new UsuarioDto();
-        u.setUsername(request.getParameter("username"));
-        u.setNombre(request.getParameter("nombre"));
-        u.setApellidos(request.getParameter("apellidos"));
-        u.setPassword(request.getParameter("password"));
-        u.setEmail(request.getParameter("email"));
-        u.setHabilitado("1".equals(request.getParameter("habilitado").toString()));
+        UsuarioDto u = obtener(request);
+        request.getSession().setAttribute("usuarioDto", u);
         
         boolean error = false;
         

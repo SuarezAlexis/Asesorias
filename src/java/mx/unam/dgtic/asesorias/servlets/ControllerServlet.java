@@ -6,13 +6,13 @@
 package mx.unam.dgtic.asesorias.servlets;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.Enumeration;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import mx.unam.dgtic.asesorias.servicios.UsuariosService;
-import mx.unam.dgtic.modelo.dto.UrlItem;
 
 /**
  *
@@ -21,7 +21,6 @@ import mx.unam.dgtic.modelo.dto.UrlItem;
 public class ControllerServlet extends HttpServlet {
     
     private static final String MAIN_PATH = "/site/webapp.jsp";
-    private static final String LOGIN_PATH = "/login";
     private static final String PARAM_NAME = "accion";
     
     /**
@@ -36,20 +35,31 @@ public class ControllerServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String accion = request.getParameter(PARAM_NAME);
-        if(request.getSession().getAttribute("usuario") != null) {
-            if(accion != null && !accion.isEmpty()) {
-                switch(accion) {
-                    case "usuarios":
-                        request.setAttribute("usuarios", UsuariosService.getInstance().obtenerTodos());
-                        break;
-                }
+        if(accion != null && !accion.isEmpty()) {
+            if(!accion.equals(request.getSession().getAttribute("lastAccion")))
+                clearSessionAttributes(request.getSession());
+            request.getSession().setAttribute("lastAccion", accion);
+            switch(accion) {
+                case "usuarios":
+                    request.setAttribute("usuarios", UsuariosService.getInstance().obtenerTodos());
+                    break;
             }
-            request.getRequestDispatcher(MAIN_PATH).forward(request, response);
+        } else {
+            clearSessionAttributes(request.getSession());
         }
-        else
-            request.getRequestDispatcher(LOGIN_PATH).forward(request, response);
+        request.getRequestDispatcher(MAIN_PATH).forward(request, response);
     }
 
+    private void clearSessionAttributes(HttpSession session) {
+        Enumeration<String> attrNames = session.getAttributeNames();
+        while(attrNames.hasMoreElements()) {
+            String attrName = attrNames.nextElement();
+            if(!attrName.equals("usuario")) {
+                session.removeAttribute(attrName);
+            }
+        }
+    }
+    
     /**
      * Handles the HTTP <code>POST</code> method.
      *

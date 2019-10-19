@@ -28,22 +28,22 @@
             <div> <c:out value="${sessionScope.errorPassword}" /> </div>
         </c:if>
     </div>
-    <form id="usuario" action="<c:url value="usuario" />" method="post" class="">
+    <form id="nuevo" action="<c:url value="usuario" />" method="post" >
         <div class="col-xs-3 form-group <c:out value="${sessionScope.errorUsername != null? 'text-danger' : ''}" />">
             <label for="username">Nombre de usuario</label>
-            <input type="text" id="username" name="username" class="form-control <c:out value="${sessionScope.errorUsername != null? 'has-error' : ''}" />"/>
+            <input type="text" id="username" name="username" class="form-control <c:out value="${sessionScope.errorUsername != null? 'has-error' : ''}" />" value="<c:out value="${sessionScope.usuarioDto != null? sessionScope.usuarioDto.username : ''}"/>"/>
         </div>
         <div class="col-xs-3 form-group <c:out value="${sessionScope.errorNombre != null? 'text-danger' : ''}" />">
             <label for="nombre">Nombre</label>
-            <input type="text" id="nombre" name="nombre" class="form-control <c:out value="${sessionScope.errorNombre != null? 'has-error' : ''}" />"/>
+            <input type="text" id="nombre" name="nombre" class="form-control <c:out value="${sessionScope.errorNombre != null? 'has-error' : ''}" />" value="<c:out value="${sessionScope.usuarioDto != null? sessionScope.usuarioDto.nombre : ''}"/>"/>
         </div>
         <div class="col-xs-3 form-group <c:out value="${sessionScope.errorApellidos != null? 'text-danger' : ''}" />">
             <label for="apellidos">Apellidos</label>
-            <input type="text" id="apellidos" name="apellidos" class="form-control <c:out value="${sessionScope.errorApellidos != null? 'has-error' : ''}" />"/>
+            <input type="text" id="apellidos" name="apellidos" class="form-control <c:out value="${sessionScope.errorApellidos != null? 'has-error' : ''}" />" value="<c:out value="${sessionScope.usuarioDto != null? sessionScope.usuarioDto.apellidos : ''}"/>"/>
         </div>
         <div class="col-xs-3 form-group <c:out value="${sessionScope.errorEmail != null? 'text-danger' : ''}" />">
             <label for="email">Correo electr&oacute;nico</label>
-            <input type="text" id="email" name="email" class="form-control <c:out value="${sessionScope.errorEmail != null? 'has-error' : ''}" />"/>
+            <input type="text" id="email" name="email" class="form-control <c:out value="${sessionScope.errorEmail != null? 'has-error' : ''}" />" value="<c:out value="${sessionScope.usuarioDto != null? sessionScope.usuarioDto.email : ''}"/>"/>
         </div>
         <div class="col-xs-3 form-group">
             <label for="rol">Roles</label>
@@ -51,7 +51,7 @@
         </div>
         <div class="col-xs-3 form-group <c:out value="${sessionScope.errorPassword != null? 'text-danger' : ''}" />">
             <label for="password">Contrase&ntilde;a</label>
-            <input type="password" id="password" name="password" class="form-control <c:out value="${sessionScope.errorPassword != null? 'has-error' : ''}" />"/>
+            <input type="password" id="password" name="password" class="form-control <c:out value="${sessionScope.errorPassword != null? 'has-error' : ''}" />" value="<c:out value="${sessionScope.usuarioDto != null? sessionScope.usuarioDto.password : ''}"/>"/>
         </div>
         <div class="col-xs-3 form-group <c:out value="${sessionScope.errorPassword != null? 'text-danger' : ''}" />">
             <label for="confirmacion">Confirmaci&oacute;n</label>
@@ -60,9 +60,10 @@
         <div class="col-xs-3 form-group">
             <label></label>
             <div class="checkbox">
-                <label><input type="checkbox" id="habilitado" name="habilitado" checked/>Habilitado</label>
+                <label><input type="checkbox" id="habilitado" name="habilitado" <c:out value="${sessionScope.usuarioDto != null and not sessionScope.usuarioDto.habilitado? '' : 'checked'}"/>/>Habilitado</label>
             </div>
         </div>
+            <!--
         <div class="col-xs-3">
             <label for="creado">Fecha de creaci&oacute;n</label>
             <span></span>
@@ -70,8 +71,8 @@
         <div class="col-xs-3">
             <label for="ultimo">&Uacute;ltimo acceso</label>
             <span></span>
-        </div>
-        <div class="col-xs-6">
+        </div> -->
+        <div class="col-xs-12">
             <button type="submit" id="submit" name="submit" class="btn btn-block btn-primary">
                 Guardar &nbsp; <span class="glyphicon glyphicon-floppy-disk"></span>
             </button>
@@ -102,14 +103,20 @@
                             <td><c:out value="${u.email}"/></td>
                             <td><c:out value="${u.habilitado}"/></td>
                             <td class="text-center">
-                                <button class="btn btn-sm btn-block btn-warning">
-                                    Editar &nbsp; <span class="glyphicon glyphicon-edit"></span>
-                                </button>
+                                <form id="editar" action="<c:url value="usuario" />" method="post">
+                                    <input type="hidden" id="editarUsername" name="editarUsername" value="<c:out value="${u.username}"/>"/>
+                                    <button type="submit" class="btn btn-sm btn-block btn-warning">
+                                        Editar &nbsp; <span class="glyphicon glyphicon-edit"></span>
+                                    </button>
+                                </form>
                             </td>
                             <td class="text-center">
-                                <button class="btn btn-sm btn-block btn-danger">
-                                    Eliminar &nbsp; <span class="glyphicon glyphicon-remove"></span>
-                                </button>
+                                <form id="eliminar" action="<c:url value="usuario" />" method="post">
+                                    <input type="hidden" id="borrarUsername" name="borrarUsername" value="<c:out value="${u.username}"/>"/>
+                                    <button type="submit" class="btn btn-sm btn-block btn-danger">
+                                        Eliminar &nbsp; <span class="glyphicon glyphicon-remove"></span>
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                     </c:forEach>

@@ -46,11 +46,23 @@ public class UsuariosServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //Validar datos y guardar usuario
-        UsuarioDto u = UsuariosService.validar(request);
-        if(u != null) {
-            UsuariosService.getInstance().guardar(u);
+        String editarUsername = request.getParameter("editarUsername");
+        String borrarUsername = request.getParameter("borrarUsername");
+        
+        if(editarUsername != null) {
+            request.getSession().setAttribute("usuarioDto", UsuariosService.getInstance().obtener(editarUsername));
+        } else {
+            if(borrarUsername != null) {
+                UsuariosService.getInstance().eliminar(borrarUsername);
+            } else {
+                UsuarioDto u = UsuariosService.validar(request);
+                if(u != null) {
+                    UsuariosService.getInstance().guardar(u);
+                    request.getSession().setAttribute("usuarioDto",null);
+                }
+            }
         }
+        
         response.sendRedirect(response.encodeURL(request.getContextPath() + CONTROLLER_PATH + "?accion=usuarios"));
         
     }
