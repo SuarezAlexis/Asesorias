@@ -34,7 +34,6 @@ public class UsuariosServlet extends HttpServlet {
             throws ServletException, IOException {
         String editarUsername = request.getParameter("editarUsername");
         String borrarUsername = request.getParameter("borrarUsername");
-        
         if(editarUsername != null) {
             request.getSession().setAttribute("usuarioDto", UsuariosService.getInstance().obtener(editarUsername));
         } else {

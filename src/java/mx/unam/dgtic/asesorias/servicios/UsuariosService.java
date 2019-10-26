@@ -5,12 +5,11 @@
  */
 package mx.unam.dgtic.asesorias.servicios;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import mx.unam.dgtic.modelo.dao.UsuarioDao;
 import mx.unam.dgtic.modelo.dao.UsuarioDaoJdbc;
+import mx.unam.dgtic.modelo.dto.RolDto;
 import mx.unam.dgtic.modelo.dto.UsuarioDto;
 
 /**
@@ -39,6 +38,12 @@ public class UsuariosService {
         u.setPassword(request.getParameter("password"));
         u.setEmail(request.getParameter("email"));
         u.setHabilitado("on".equals(request.getParameter("habilitado")));
+        String[] roles = (String[]) request.getParameterMap().get("roles");
+        for(String r : roles) {
+            RolDto rol = new RolDto();
+            rol.setId(Short.parseShort(r));
+            u.getRoles().add(rol);
+        }
         return u;
     }
     

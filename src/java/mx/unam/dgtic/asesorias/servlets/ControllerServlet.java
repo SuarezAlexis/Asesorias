@@ -43,6 +43,7 @@ public class ControllerServlet extends HttpServlet {
             switch(accion) {
                 case "usuarios":
                     request.setAttribute("usuarios", UsuariosService.getInstance().obtenerTodos());
+                    request.setAttribute("roles", RolesService.getInstance().obtenerTodos());
                     break;
                 case "roles":
                     request.setAttribute("roles", RolesService.getInstance().obtenerTodos());

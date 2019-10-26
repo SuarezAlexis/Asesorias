@@ -45,10 +45,6 @@
             <label for="email">Correo electr&oacute;nico</label>
             <input type="text" id="email" name="email" class="form-control <c:out value="${sessionScope.errorEmail != null? 'has-error' : ''}" />" value="<c:out value="${sessionScope.usuarioDto != null? sessionScope.usuarioDto.email : ''}"/>"/>
         </div>
-        <div class="col-xs-3 form-group">
-            <label for="rol">Roles</label>
-            <input type="text" id="rol" name="rol" class="form-control"/>
-        </div>
         <div class="col-xs-3 form-group <c:out value="${sessionScope.errorPassword != null? 'text-danger' : ''}" />">
             <label for="password">Contrase&ntilde;a</label>
             <input type="password" id="password" name="password" class="form-control <c:out value="${sessionScope.errorPassword != null? 'has-error' : ''}" />" value="<c:out value="${sessionScope.usuarioDto != null? sessionScope.usuarioDto.password : ''}"/>"/>
@@ -58,20 +54,33 @@
             <input type="password" id="password" name="confirmacion" class="form-control <c:out value="${sessionScope.errorPassword != null? 'has-error' : ''}" />"/>
         </div>
         <div class="col-xs-3 form-group">
+            <label for="rol">Roles</label>
+            <div>
+                <c:set var="habilitado" value="false" />
+                <c:forEach items="${requestScope.roles}" var="r">
+                    <c:forEach items="${sessionScope.usuarioDto.roles}" var="ur" >
+                        <c:if test="${ur eq r}">
+                            <c:set var="habilitado" value="true" />
+                        </c:if>
+                    </c:forEach>
+                    
+                    <label><input type="checkbox" id="roles" name="roles" value="${r.id}" <c:out value="${habilitado? 'checked' : ''}"/>/><c:out value="${r.nombre}"/></label>
+                </c:forEach>
+            </div>
+            <!-- 
+            <select id="roles" name="roles" class="form-control" multiple>
+                <c:forEach items="${requestScope.roles}" var="r">
+                    <option value="${r.id}"><c:out value="${r.nombre}"/></option>
+                </c:forEach>
+            </select>
+            -->
+        </div>
+        <div class="col-xs-3 form-group">
             <label></label>
             <div class="checkbox">
                 <label><input type="checkbox" id="habilitado" name="habilitado" <c:out value="${sessionScope.usuarioDto != null and not sessionScope.usuarioDto.habilitado? '' : 'checked'}"/>/>Habilitado</label>
             </div>
         </div>
-            <!--
-        <div class="col-xs-3">
-            <label for="creado">Fecha de creaci&oacute;n</label>
-            <span></span>
-        </div>
-        <div class="col-xs-3">
-            <label for="ultimo">&Uacute;ltimo acceso</label>
-            <span></span>
-        </div> -->
         <div class="col-xs-12">
             <button type="submit" id="submit" name="submit" class="btn btn-block btn-primary">
                 Guardar &nbsp; <span class="glyphicon glyphicon-floppy-disk"></span>
